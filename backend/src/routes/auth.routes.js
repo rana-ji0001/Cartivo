@@ -1,6 +1,9 @@
 const express = require('express');
 
 const router = express.Router();
+const authController = require("../controllers/auth.controller");
+const authMiddleware = require("../middleware/auth.middleware");
+const {admin} = require("../middleware/adminMiddleware");
 
 
 /**
@@ -8,7 +11,7 @@ const router = express.Router();
  * @description to register the user with username, email, password
  * @access Public
  */
-router.post("/register");
+router.post("/register",authController.registerUserController);
 
 
 /**
@@ -16,15 +19,22 @@ router.post("/register");
  * @description to login the user with email, password
  * @access Public
  */
-router.post("/login");
+router.post("/login",authController.loginUserController);
 
 
 /**
- * @route POST /api/auth/get-me 
+ * @route POST /api/auth/users
  * @description to register the user with username, email, password
- * @access prive
+ * @access private
  */
-router.get("/get-me");
+router.get("/users",authMiddleware.authUser,admin,authController.getUsers);
+
+/**
+ * @route Get /api/auth/get-me
+ * @description to get the info of the user
+ * @access Private
+ */
+router.get("/get-me",authMiddleware.authUser);
 
 
 

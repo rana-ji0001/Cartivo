@@ -18,58 +18,54 @@ async function registerUserController(req, res) {
     }
 
     try {
-        const isUserAlreadyExists = await userModel.find({
+        const isUserAlreadyExists = await userModel.findOne({
             $or: [{ username }, { email }]
         });
         if (isUserAlreadyExists) {
             return res.status(400).json({ message: "user alreadt exists with these credentials" });
         }
-        const hash = await bcrypt.hash(password,10);
+        const hash = await bcrypt.hash(password, 10);
 
         const user = await userModel.create({
             username,
             email,
-            password:hash,
-            role 
+            password: hash
         });
         const token = jwt.sign(
             { id: user._id, username: user.username },
             process.env.JWT_SECRET,
             { expiresIn: "1D" }
         )
-        if(user){
-            const otp = Math.floor(100000 + Math.random()*900000).toString();
-            const msg = `Welcome to AliBaBa ${username}
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            maxAge: 24 * 60 * 60 * 1000
+        });
+        if (user) {
+            const otp = Math.floor(100000 + Math.random() * 900000).toString();
+            const msg = `Welcome to Cartivo ${username}
             here is your OTP for verification ${otp}
-            Thanx For Coming On AliBaBa`
-            await sendEmail(email, `Welcome to AliBaBa - Your OTP for registration`,msg)
+            Thanx For Coming On Cartivo`
+            await sendEmail(email, `Welcome to Cartivo - Your OTP for registration`, msg)
             res.status(201).json({
-                message:"User Registered Successfully",
-                user:{
-                    _id:user._id,
-                    username:user.username,
-                    email:user.email,
-                    role:user.role
+                message: "User Registered Successfully",
+                user: {
+                    id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    role: user.role
 
                 }
             })
-        }else{
-            return res.status(400).json({message:"Invalid User Details"});
+        } else {
+            return res.status(400).json({ message: "Invalid User Details" });
         }
         //TODOS OTP sending and verification and email verification
         //TODOS welcome mail
-
-
-
     } catch (error) {
         console.log(error || "server error")
-
     }
-
-
-
-
-
 }
 
 
@@ -80,8 +76,73 @@ async function registerUserController(req, res) {
  * @description loginUserController is used to login the user with email and password
  * @access Public
  */
+
+async function loginUserController(req, res) {
+    const { email, password } = req.body;
+    try {
+        const user = await userModel.findOne({ email });
+        if (user && (await bcrypt.compare(password, user.password))) {
+            const token = jwt.sign(
+                { id: user._id, username: user.username },
+                process.env.JWT_SECRET,
+                { expiresIn: "1D" }
+            );
+
+            return res.status(200).json({
+                message: "User Logged In Successfully",
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                role: user.role,
+                token
+            });
+        }else{
+            return res.status(400).json({
+                message:"Invalid email or Password"
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({message:`${error}` || "server error"})
+
+    }
+
+
+}
 /**
- * @route POST /api/auth/get-me
- * @description getMeController is used to get the user details 
+ * @route POST /api/auth/users
+ * @description  
  * @access private
  */
+
+async function getUsers(req,res) {
+    try {
+        const users = await userModel.find({}).select('-password');
+        return res.status(200).json(users);
+    } catch (err) {
+        return res.status(400).json({message:"server error"});
+    }
+    
+}
+
+/**
+ * @route POST /api/auth/get-me
+ * @description  to get the user details
+ * @access private
+ */
+async function getMe(req,res) {
+    const user = await userModel.findById(req.user.id);
+    res.status(200).json({
+        message: "User Details Fetched Successfully",
+        user: {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+
+        }
+    })
+    
+}
+
+
+module.exports = {registerUserController,loginUserController,getUsers}
