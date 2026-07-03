@@ -47,7 +47,7 @@ async function registerUserController(req, res) {
             const msg = `Welcome to Cartivo ${username}
             here is your OTP for verification ${otp}
             Thanx For Coming On Cartivo`
-            await sendEmail(email, `Welcome to Cartivo - Your OTP for registration`, msg)
+            await sendEmail(email, `Hello ${username} , We welcome you on Cartivo, Here is your OTP:- `, msg)
             res.status(201).json({
                 message: "User Registered Successfully",
                 user: {
@@ -87,6 +87,12 @@ async function loginUserController(req, res) {
                 process.env.JWT_SECRET,
                 { expiresIn: "1D" }
             );
+            res.cookie("token", token, {
+                httpOnly: true,
+                secure: false,      // true if using HTTPS
+                sameSite: "lax",    // or "none" if frontend/backend are on different origins with HTTPS
+                maxAge: 24 * 60 * 60 * 1000
+            });
 
             return res.status(200).json({
                 message: "User Logged In Successfully",
@@ -94,16 +100,15 @@ async function loginUserController(req, res) {
                 username: user.username,
                 email: user.email,
                 role: user.role,
-                token
             });
-        }else{
+        } else {
             return res.status(400).json({
-                message:"Invalid email or Password"
+                message: "Invalid email or Password"
             })
         }
     } catch (error) {
         console.log(error);
-        res.status(400).json({message:`${error}` || "server error"})
+        res.status(400).json({ message: `${error}` || "server error" })
 
     }
 
@@ -115,14 +120,14 @@ async function loginUserController(req, res) {
  * @access private
  */
 
-async function getUsers(req,res) {
+async function getUsers(req, res) {
     try {
         const users = await userModel.find({}).select('-password');
         return res.status(200).json(users);
     } catch (err) {
-        return res.status(400).json({message:"server error"});
+        return res.status(400).json({ message: "server error" });
     }
-    
+
 }
 
 /**
@@ -130,7 +135,7 @@ async function getUsers(req,res) {
  * @description  to get the user details
  * @access private
  */
-async function getMe(req,res) {
+async function getMe(req, res) {
     const user = await userModel.findById(req.user.id);
     res.status(200).json({
         message: "User Details Fetched Successfully",
@@ -141,8 +146,8 @@ async function getMe(req,res) {
 
         }
     })
-    
+
 }
 
 
-module.exports = {registerUserController,loginUserController,getUsers}
+module.exports = { registerUserController, loginUserController, getUsers }
