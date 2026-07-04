@@ -1,7 +1,9 @@
 const express = require("express");
 const {admin} = require("../middleware/adminMiddleware");
 const {authUser} = require("../middleware/auth.middleware");
-const {upload} = require('../middleware/file.middleware');
+const multer = require("multer");
+const upload = multer({dest:"uploads/"});
+
 
 const router = express.Router();
 
@@ -16,12 +18,12 @@ const {getProductController, getProductById, createProductController, udpateProd
  * @access get and post both are Private
  * 
  */
-router.route('/').get(getProductController).post(authUser,admin,upload('image'),createProductController)
+router.route('/').get(getProductController).post(authUser,admin,upload.single('image'),createProductController)
 
 /**
  * to get product by id upadate product and delete product
  */
-router.route("/:id").get(getProductById).put(authUser,admin,upload('image'),udpateProducts).delete(authUser,admin,deleteProducts)
+router.route("/:id").get(getProductById).put(authUser,admin,upload.single('image'),udpateProducts).delete(authUser,admin,deleteProducts)
 
 
 module.exports = router

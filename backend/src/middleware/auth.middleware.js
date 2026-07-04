@@ -19,7 +19,6 @@ async function authUser(req,res,next) {
     }
     try {
         const decoded = jwt.verify(token,process.env.JWT_SECRET);
-        console.log("Decoded token:", decoded);
         req.user = await userModel.findById(decoded.id).select('-password');
         next();
     } catch (error) {
