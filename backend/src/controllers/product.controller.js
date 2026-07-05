@@ -76,11 +76,11 @@ async function udpateProducts(req, res) {
             const result = await cloudinary.uploader.upload(req.file.path);
             console.log(result)
             imageUrl = result.secure_url;
+            product.imageUrl = imageUrl || product.imageUrl
         }
         const udpateProduct = await product.save();
         return res.status(201).json({ message: "Product updated successfully", udpateProduct });
     }
-
 }
 async function deleteProducts(req, res) {
     try {

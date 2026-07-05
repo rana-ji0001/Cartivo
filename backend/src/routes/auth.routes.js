@@ -36,6 +36,13 @@ router.get("/users",authMiddleware.authUser,admin,authController.getUsers);
  */
 router.get("/get-me",authMiddleware.authUser);
 
+/**
+ * @route Get /api/auth/verify-email
+ * @description to verify the user otp with the email otp
+ * @access Public
+ */
+router.post("/verify-email", authController.verifyEmailController);
+
 
 
 

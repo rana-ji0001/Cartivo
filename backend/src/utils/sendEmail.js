@@ -21,7 +21,6 @@ const sendEmail = async(to,subject,text) => {
         return info;
     } catch (error) {
         console.log(error || "error sending mail");
-        
     }
 }
 module.exports = sendEmail

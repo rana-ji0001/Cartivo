@@ -29,7 +29,7 @@ const analystRouter = require('./routes/analytics.routes');
 app.use('/api/auth', authRouter)
 app.use('/api/products', productRouter)
 // app.use('/api/payment', paymentRouter)
-// app.use('/api/orders', orderRouter)
+app.use('/api/orders', orderRouter)
 // app.use('/api/analytics', analystRouter)
 
 

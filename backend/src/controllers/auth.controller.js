@@ -24,45 +24,27 @@ async function registerUserController(req, res) {
         if (isUserAlreadyExists) {
             return res.status(400).json({ message: "user alreadt exists with these credentials" });
         }
-        const hash = await bcrypt.hash(password, 10);
 
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        const hash = await bcrypt.hash(password, 10);
         const user = await userModel.create({
             username,
             email,
-            password: hash
+            password: hash,
+            otp,
+            otpExpires: Date.now() + 5 * 60 * 1000,//these are 5 minutes
+            verified: false
         });
-        const token = jwt.sign(
-            { id: user._id, username: user.username },
-            process.env.JWT_SECRET,
-            { expiresIn: "1D" }
-        )
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            maxAge: 24 * 60 * 60 * 1000
-        });
-        if (user) {
-            const otp = Math.floor(100000 + Math.random() * 900000).toString();
-            const msg = `Welcome to Cartivo ${username}
-            here is your OTP for verification ${otp}
-            Thanx For Coming On Cartivo`
-            await sendEmail(email, `Hello ${username} , We welcome you on Cartivo, Here is your OTP:- `, msg)
-            res.status(201).json({
-                message: "User Registered Successfully",
-                user: {
-                    id: user._id,
-                    username: user.username,
-                    email: user.email,
-                    role: user.role
 
-                }
-            })
-        } else {
-            return res.status(400).json({ message: "Invalid User Details" });
-        }
-        //TODOS OTP sending and verification and email verification
-        //TODOS welcome mail
+        const msg = `
+        <h2>Welcome to Cartivo ${username}</h2>
+            <p>Here is your OTP for verification ${otp}</p>
+            <p>Thanx For Coming On Cartivo</p>`
+        await sendEmail(email, `Hello ${username} , We welcome you on Cartivo, You can Verify Your Email`, msg)
+        return res.status(201).json({
+            message: "Registeration Successfully, Please Verify Your Email",
+        });
+
     } catch (error) {
         console.log(error || "server error")
     }
@@ -81,6 +63,11 @@ async function loginUserController(req, res) {
     const { email, password } = req.body;
     try {
         const user = await userModel.findOne({ email });
+        if (!user.verified) {
+            return res.status(403).json({
+                message: "Please verify your email first."
+            });
+        }
         if (user && (await bcrypt.compare(password, user.password))) {
             const token = jwt.sign(
                 { id: user._id, username: user.username },
@@ -148,6 +135,66 @@ async function getMe(req, res) {
     })
 
 }
+/**
+ * @route POST /api/auth/verify-email
+ * @description  to verify the email otp
+ * @access public
+ */
+async function verifyEmailController(req, res) {
+    const { otp, email } = req.body;
+    try{const user = await userModel.findOne({ email });
+    if (!user) {
+        return res.status(404).json({
+            message: "User not found"
+        });
+    }
+    if (user.otp !== otp) {
+        return res.status(400).json({
+            message: "Wrong Otp"
+        });
+    }
+    if (user.otpExpires < Date.now()) {
+        user.otp = null;
+        user.otpExpires = null;
+        await user.save();
+        return res.status(400).json({
+            message: "OTP expired"
+        });
+    }
+    user.verified = true;
+    user.otp = null;
+    user.otpExpires = null;
+    await user.save();
 
 
-module.exports = { registerUserController, loginUserController, getUsers }
+    const token = jwt.sign(
+        { id: user._id, username: user.username },
+        process.env.JWT_SECRET,
+        { expiresIn: "1D" }
+    )
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 24 * 60 * 60 * 1000
+    });
+    return res.status(200).json({
+        message: "Email verified successfully",
+        user: {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role
+        }
+    })}catch(error){
+        return res.status(400).json({
+            message:error.message
+        })
+    }
+
+
+
+}
+
+
+module.exports = { registerUserController, loginUserController, getUsers, verifyEmailController }

@@ -23,7 +23,7 @@ async function authUser(req,res,next) {
         next();
     } catch (error) {
         return res.status(400).json({
-            message:"Invalid Token"
+            message:error.message
         });
     }
     
