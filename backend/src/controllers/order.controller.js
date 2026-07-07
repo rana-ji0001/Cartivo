@@ -4,7 +4,7 @@ const sendEmail = require("../utils/sendEmail");
 
 
 /**
- * @Rroute api/orders/addOrders
+ * @Rroute Post api/orders/
  * @description to add the order 
  * @access Private
  */
@@ -52,7 +52,7 @@ async function addOrderItemsController(req, res) {
 }
 
 /**
- * @Rroute api/orders/myOrders
+ * @Rroute Get api/orders/myOrders
  * @description to add the order 
  * @access Private
  */
@@ -70,9 +70,9 @@ async function getMyOrderController(req, res) {
 
 }
 /**
- * @Rroute api/orders/
+ * @Rroute Get api/orders/
  * @description to get the all orders
- * @access Private
+ * @access Private admin
  */
 async function getOrdersController(req, res) {
     try {
@@ -87,7 +87,7 @@ async function getOrdersController(req, res) {
 
 }
 /**
- * @Rroute api/orders/updateOrder
+ * @Rroute PUT api/orders/updateOrder
  * @description to update the status of that order
  * @access Private
  */
