@@ -5,12 +5,12 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
+        ref: "user",
         required: true
     },
     items: [
         {
-            productId: { type: mongoose.Schema.Types.ObjectId, ref: "products", required: true },
+            productId: { type: mongoose.Schema.Types.ObjectId, ref: "product", required: true },
             qty: { type: Number, required: true },
             price: { type: Number, required: true }
         }

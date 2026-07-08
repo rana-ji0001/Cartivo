@@ -1,0 +1,451 @@
+{
+  "info": {
+    "_postman_id": "2aa72104-7d38-4b0b-9edc-54dbac457ae6",
+    "name": "Cartivo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46879749"
+  },
+  "item": [
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "get all orders admin",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/orders/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "orders",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add items",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"items\": [\r\n      {\r\n        \"productId\": \"6a491ca686992d45baabc2c3\",\r\n        \"qty\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 1997,\r\n    \"paymentId\": \"PAY_123456789\",\r\n    \"address\": {\r\n      \"fullName\": \"Karan Rana 1\",\r\n      \"street\": \"123 MG Road\",\r\n      \"city\": \"Delhi\",\r\n      \"postalCode\": \"110001\",\r\n      \"country\": \"India\"\r\n    }\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/orders/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "orders",
+                ""
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST http://localhost:3000/api/orders/addOrders \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -H \"Cookie: token=YOUR_JWT_TOKEN\" \\\r\n  -d '{\r\n    \"items\": [\r\n      {\r\n        \"productId\": \"6869f8d4c6f8b9f1a1234567\",\r\n        \"qty\": 2,\r\n        \"price\": 499\r\n      },\r\n      {\r\n        \"productId\": \"6869f8d4c6f8b9f1a7654321\",\r\n        \"qty\": 1,\r\n        \"price\": 999\r\n      }\r\n    ],\r\n    \"totalAmount\": 1997,\r\n    \"paymentId\": \"PAY_123456789\",\r\n    \"address\": {\r\n      \"fullName\": \"Karan Rana\",\r\n      \"street\": \"123 MG Road\",\r\n      \"city\": \"Delhi\",\r\n      \"postalCode\": \"110001\",\r\n      \"country\": \"India\"\r\n    }\r\n  }'"
+          },
+          "response": []
+        },
+        {
+          "name": "Admin Update order",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\":\"Delivered\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/orders/6a4e1848045aadc4ca61d002/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "orders",
+                "6a4e1848045aadc4ca61d002",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "myOrders",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"\",\r\n    \"password\": \"\"\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders/myOrders",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "myOrders"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "verify-email",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"26itprean@rkgit.edu.in\",\r\n    \"otp\":\"970645\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/verify-email",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "verify-email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"k\",\r\n    \"password\": \"K\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register User",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"karan2\",\r\n    \"email\":\"26itprean@rkgit.edu.in\",\r\n    \"password\":\"karan@2\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all the users-admin",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/auth/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "get all products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/products/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "admin--create new product ",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "type": "text",
+                  "key": "name",
+                  "value": "Apple Watch Series 11"
+                },
+                {
+                  "type": "text",
+                  "key": "description",
+                  "value": "GPS smartwatch with health tracking, ECG, blood oxygen monitoring, and fitness features."
+                },
+                {
+                  "type": "text",
+                  "key": "price",
+                  "value": "49999"
+                },
+                {
+                  "type": "text",
+                  "key": "category",
+                  "value": "Smartwatches"
+                },
+                {
+                  "type": "text",
+                  "key": "stock",
+                  "value": "23"
+                },
+                {
+                  "type": "file",
+                  "key": "image",
+                  "src": "/C:/Users/karan/Downloads/How to mix up activities for a more effective.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/products/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "products",
+                ""
+              ]
+            },
+            "description": "Generated from cURL: curl --location 'http://localhost:3000/api/products' \\\r\n--form 'name=\"iPhone 16 Pro\"' \\\r\n--form 'description=\"Latest Apple flagship smartphone\"' \\\r\n--form 'price=\"129999\"' \\\r\n--form 'category=\"Mobile\"' \\\r\n--form 'stock=\"25\"' \\\r\n--form 'image=@\"/C:/Users/YourName/Pictures/iphone.jpg\"'"
+          },
+          "response": []
+        },
+        {
+          "name": "get product by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/products/6a491a0886992d45baabc2c2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "6a491a0886992d45baabc2c2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update product ",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "type": "text",
+                  "key": "name",
+                  "value": "iPhone 16 Pro Max"
+                },
+                {
+                  "type": "text",
+                  "key": "description",
+                  "value": "Updated description"
+                },
+                {
+                  "type": "text",
+                  "key": "price",
+                  "value": "139999"
+                },
+                {
+                  "type": "text",
+                  "key": "category",
+                  "value": "Mobile"
+                },
+                {
+                  "type": "text",
+                  "key": "stock",
+                  "value": "15"
+                },
+                {
+                  "type": "file",
+                  "key": "image",
+                  "src": "/C:/Users/karan/Downloads/iphone 16 pro max.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/products/6a48ea9b28d7fe309cb7bae8",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "products",
+                "6a48ea9b28d7fe309cb7bae8"
+              ]
+            },
+            "description": "Generated from cURL: curl --location --request PUT 'http://localhost:3000/api/products/PRODUCT_ID' \\\r\n--header 'Cookie: token=YOUR_JWT_TOKEN' \\\r\n--form 'name=\"iPhone 16 Pro Max\"' \\\r\n--form 'description=\"Updated description\"' \\\r\n--form 'price=\"139999\"' \\\r\n--form 'category=\"Mobile\"' \\\r\n--form 'stock=\"15\"' \\\r\n--form 'image=@\"/C:/Users/YourName/Pictures/iphone.jpg\"'"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Products",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/products/6a491d4386992d45baabc2c4",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "6a491d4386992d45baabc2c4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Analytic",
+      "item": [
+        {
+          "name": "Get stats admin",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/analytics/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "analytics",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -33,11 +33,7 @@ async function addOrderItemsController(req, res) {
                 <p>Thank you for shopping with Cartivo!</p>`;
 
             try {
-                await sendEmail({
-                    email: req.user.email,
-                    subject: "Cartivo: Order Confirmation",
-                    message
-                });
+                await sendEmail(req.user.email,"Cartivo: Order Confirmation",message);
             } catch (err) {
                 console.error("Email Error:", err.message);
             }
