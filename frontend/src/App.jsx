@@ -1,10 +1,18 @@
 import React from 'react'
+import { Outlet } from 'react-router'
+import { router } from './app.routes'
+import Navbar from './Components/Navbar'
+import Footer from './Components/Footer'
+
 
 const App = () => {
   return (
-    <div>
-      <h2>Cartivo-Ecommerce</h2>
-    </div>
+    <>
+      <Navbar />
+      <Outlet/>
+      <Footer/>
+    </>
+
   )
 }
 
