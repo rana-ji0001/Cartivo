@@ -1,0 +1,19 @@
+import React from 'react'
+import { Link } from 'react-router'
+
+const ProductCart = ({ product }) => {
+    return (
+        <div className='productCard'>
+            <img src={product.imageUrl} alt={product.name} className='product-img' />
+            <div className='product-info'>
+                <h3 className='product-name'>{product.name}</h3>
+                <p className='product-price'>{product.price.toFixed(2)}₹</p>
+                <Link to={`/products/${product._id}`} className="view-info">View Info</Link>
+            </div>
+
+
+        </div>
+    )
+}
+
+export default ProductCart

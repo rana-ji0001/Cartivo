@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const cookie = require('cookie-parser');
 const bcrypt = require("bcryptjs");
 const sendEmail = require("../utils/sendEmail");
+const blacklistedModel = require("../models/blacklistToken.model");
 
 /**
  * @route POST /api/auth/register
@@ -122,7 +123,7 @@ async function getUsers(req, res) {
  * @description  to get the user details
  * @access private
  */
-async function getMe(req, res) {
+async function getMeController(req, res) {
     const user = await userModel.findById(req.user.id);
     res.status(200).json({
         message: "User Details Fetched Successfully",
@@ -135,6 +136,22 @@ async function getMe(req, res) {
     })
 
 }
+/**
+ * @route Get /api/auth/logout
+ * @description clear token from the cookie and add the token to the blacklist
+ * @access Public
+ */
+
+async function logoutUserController(req,res) {
+    const token = req.cookies.token;
+    if(token){
+        await blacklistedModel.create({token});
+    }
+    res.clearCookie("token");
+    res.status(200).json({ message: "User Logout Successfully" })
+    
+}
+
 /**
  * @route POST /api/auth/verify-email
  * @description  to verify the email otp
@@ -197,4 +214,4 @@ async function verifyEmailController(req, res) {
 }
 
 
-module.exports = { registerUserController, loginUserController, getUsers, verifyEmailController }
+module.exports = { registerUserController, loginUserController, getUsers, verifyEmailController, logoutUserController, getMeController }

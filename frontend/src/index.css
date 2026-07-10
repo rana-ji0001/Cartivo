@@ -1,0 +1,16 @@
+body{
+  font-family: "Oxanium", sans-serif;
+  color: #6C8480;
+}
+
+
+.vanta-background {
+  position: fixed;
+  inset: 0;
+}
+
+.site-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}

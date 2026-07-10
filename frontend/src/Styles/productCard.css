@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+
+.productCard {
+    width: 280px;
+    background: #ffffff;
+    border-radius: 15px;
+    font-family: "Oswald", sans-serif;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.productCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.product-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background: #f5f5f5;
+}
+
+.product-info {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.product-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #222;
+    margin: 0;
+    line-height: 1.4;
+
+    /* Prevent long names from breaking layout */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.product-price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #2ecc71;
+    margin: 0;
+}
+
+.view-info {
+    text-decoration: none;
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.view-info:hover {
+    background: #2563eb;
+}
+
+@media (max-width: 768px) {
+    .productCard {
+        width: 100%;
+        max-width: 320px;
+        margin: auto;
+    }
+
+    .product-img {
+        height: 220px;
+    }
+}

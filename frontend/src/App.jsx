@@ -1,20 +1,22 @@
 import React from 'react'
 import { Outlet } from 'react-router'
-import { router } from './app.routes'
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
+import VantaBackground from './backrgound/VantaBackground'
 
 
 const App = () => {
   return (
     <>
-      <Navbar />
-      <Outlet/>
-      <Footer/>
+      <VantaBackground />
+      <main className='site-content'>
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </main>
     </>
 
   )
 }
 
 export default App
-

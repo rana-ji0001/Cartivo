@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "ElevenTwenty";
+  src: url("../assets/fonts/ElevenTwenty.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #e6e6e6;
+  color: #BAC8B1;
+}
+
+.navbar .navbar-brand {
+  font-family: "ElevenTwenty", sans-serif;
+  font-size: 24px;
+  
+}
+.navbar .navbar-brand a {
+  text-decoration: none;
+  color: #404e3b;
+}
+.navbar .navbar-links {
+  display: flex;
+  gap: 20px;
+  
+}
+.navbar .navbar-links a {
+  color: #404e3b;
+  text-decoration: none;
+  transition: color 0.3s ease-in;
+  position: relativ;
+}
+.navbar a:hover {
+  color: #7b9669;
+}

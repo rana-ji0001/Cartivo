@@ -34,7 +34,7 @@ router.get("/users",authMiddleware.authUser,admin,authController.getUsers);
  * @description to get the info of the user
  * @access Private
  */
-router.get("/get-me",authMiddleware.authUser);
+router.get("/get-me",authMiddleware.authUser, authController.getMeController);
 
 /**
  * @route Get /api/auth/verify-email
@@ -42,6 +42,15 @@ router.get("/get-me",authMiddleware.authUser);
  * @access Public
  */
 router.post("/verify-email", authController.verifyEmailController);
+
+/**
+ * @route Get /api/auth/logout
+ * @description clear token from the cookie and add the token to the blacklist
+ * @access Public
+ */
+
+router.get('/logout',authController.logoutUserController);
+
 
 
 
