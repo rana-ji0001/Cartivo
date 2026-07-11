@@ -4,7 +4,7 @@ import { Authcontext } from "../../Context/AuthContext";
 
 export const useAuth = () => {
     const context = useContext(Authcontext);
-    const {loading, setLoading, user, setUser} = context();
+    const {loading, setLoading, user, setUser} = context;
 
 
     const handleLogin = async({email, password}) => {
@@ -60,5 +60,6 @@ export const useAuth = () => {
         }
         getAndSetUser();
     },[]);
+    return {handleLogin, handleLogout, handleRegister, user, loading}
 
 }

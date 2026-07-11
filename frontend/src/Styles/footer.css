@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "ElevenTwenty";
+  src: url("../assets/fonts/ElevenTwenty.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+.footer{
+    background: #e6e6e6;
+    border-top: 1px solid #BAC8B1;
+    padding: 40px 20px;
+    margin-top: auto;
+}
+
+.footer .footer-contents{
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.brand-container .brand{
+    color: #404E3B;
+    margin-bottom: 10px;
+    font-family: "ElevenTwenty", sans-serif;
+    font-size: 24px;
+    text-decoration: none;
+}
+.footer-contents p{
+    font-size: 1rem;
+    color: #6C8480;
+}
+.footer-contents .div-link{
+    display: flex;
+    gap: 20px;
+
+}
+.div-link a{
+    color: #6C8480;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+.div-link a:hover {
+    color: #404E3B;
+    text-decoration: underline;
+}

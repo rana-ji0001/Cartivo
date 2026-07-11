@@ -11,7 +11,7 @@ export async function register({username, email, password}) {
         const response = await api.post("/auth/register", {
             username, email, password
         });
-        return response;
+        return response.data;
     } catch (error) {
         console.log(error || "error");
     }
@@ -23,7 +23,7 @@ export async function login({email, password}) {
         const response = await api.post("/auth/login", {
             email, password
         });
-        return response;
+        return response.data;
     } catch (error) {
         console.log(error || "error")
         

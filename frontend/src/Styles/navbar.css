@@ -18,8 +18,12 @@
   font-family: "ElevenTwenty", sans-serif;
   font-size: 24px;
   
+  
 }
-.navbar .navbar-brand a {
+.navbar-brand a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
   color: #404e3b;
 }
@@ -28,11 +32,10 @@
   gap: 20px;
   
 }
-.navbar .navbar-links a {
+.navbar-links a {
   color: #404e3b;
   text-decoration: none;
   transition: color 0.3s ease-in;
-  position: relativ;
 }
 .navbar a:hover {
   color: #7b9669;
