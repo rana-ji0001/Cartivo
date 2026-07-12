@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const ProductCart = ({ product }) => {
+const ProductCard = ({ product }) => {
     return (
         <div className='productCard'>
             <img src={product.imageUrl} alt={product.name} className='product-img' />
@@ -16,4 +16,4 @@ const ProductCart = ({ product }) => {
     )
 }
 
-export default ProductCart
+export default ProductCard

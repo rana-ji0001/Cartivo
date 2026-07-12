@@ -26,6 +26,7 @@
   gap: 10px;
   text-decoration: none;
   color: #404e3b;
+  font-family: "ElevenTwenty", sans-serif;
 }
 .navbar .navbar-links {
   display: flex;

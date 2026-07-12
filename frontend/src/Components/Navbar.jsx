@@ -6,14 +6,13 @@ import { useAuth } from '../Hooks/auth/auth.hooks';
 import '../Styles/navbar.css'
 
 const Navbar = () => {
-  const {loading, handleLogout, user} = useAuth();
+  const {handleLogout, user} = useAuth();
   const navigate = useNavigate();
   // const cartItems = useSelector((state) => state.cart.cartItems);
 
   const handleClick = async() => {
     handleLogout();
     navigate("/login");
-
   }
 
 
@@ -31,7 +30,7 @@ const Navbar = () => {
 
             {user.role === "admin" && <li><Link to="/admin">Admin</Link></li>}
             <li>
-              <button onClick={handleClick} className="logout-btn">Logout</button>
+              <button onClick={handleClick} className="shine-btn">Logout</button>
             </li>
           </>
         ) : <li><Link to="/login">Login</Link></li>}

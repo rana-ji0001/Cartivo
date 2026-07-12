@@ -5,10 +5,11 @@
   font-style: normal;
 }
 .footer{
-    background: #e6e6e6;
+    background: #e6e6e6cc;
     border-top: 1px solid #BAC8B1;
     padding: 40px 20px;
     margin-top: auto;
+    margin-bottom: 0%;
 }
 
 .footer .footer-contents{
@@ -29,7 +30,7 @@
 }
 .footer-contents p{
     font-size: 1rem;
-    color: #6C8480;
+    color: #404E3B;
 }
 .footer-contents .div-link{
     display: flex;
@@ -37,11 +38,11 @@
 
 }
 .div-link a{
-    color: #6C8480;
+    color: #404E3B;
     font-size: 0.9rem;
     text-decoration: none;
 }
 .div-link a:hover {
-    color: #404E3B;
+    color: #6C8480;
     text-decoration: underline;
 }
