@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import '../Styles/productCard.css'
 
 const ProductCard = ({ product }) => {
     return (

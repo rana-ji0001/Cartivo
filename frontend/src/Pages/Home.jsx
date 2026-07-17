@@ -12,7 +12,7 @@ const Home = () => {
     async function fetchProducts() {
       try {
         const data = await getAllProducts();
-        setProducts(data.slice(0, 4));
+        setProducts(data.products.slice(0, 4));
       } catch (error) {
         console.log(error.message);
       } finally {
@@ -22,7 +22,7 @@ const Home = () => {
     fetchProducts();
   },[]);
   return (
-    <home className="home">
+    <div className="home">
       <div className='hero-banner'>
         <h1>Welcome to Cartivo</h1>
         <p>Discover the best products with shocking prices</p>
@@ -33,13 +33,13 @@ const Home = () => {
       ):(
         <div className='product-grid'>
           {
-            products.map((product) => {
+            products.map((product) => (
               <ProductCard key={product._id} product={product}/>
-            })
+            ))
           }
         </div>
       )}
-    </home>
+    </div>
   );
 }
 

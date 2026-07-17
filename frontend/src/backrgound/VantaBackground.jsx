@@ -31,7 +31,7 @@ export default function VantaBackground() {
         minHeight: 200,
         minWidth: 200,
 
-        backgroundColor: 0x404E3B,
+        backgroundColor: 0x0D0D0D,
 
         color: 0x7B9669,
         points: 14,
