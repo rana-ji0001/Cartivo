@@ -8,6 +8,7 @@ import ReturnPolicy from "./Pages/ReturnPolicy";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import EmailVerify from "./Pages/EmailVerify";
+import ProductDetails from "./Pages/ProductDetails";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path:"/verify-email",
         element:<EmailVerify/>
+      },
+      {
+        path:"/products/:id",
+        element:<ProductDetails/>
       }
     ],
   },
