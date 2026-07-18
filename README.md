@@ -1,4 +1,8 @@
-# 🛒 Cartivo - MERN E-Commerce Platform
+<p align="center">
+  <img src="/frontend/public/logo.png" alt="Cartivo Logo" width="180">
+</p>
+
+<h1 align="center">Cartivo</h1>
 
 Cartivo is a modern full-stack E-Commerce web application built using the MERN Stack. It provides a seamless shopping experience with secure authentication, product management, shopping cart functionality, and an admin dashboard for managing products.
 
