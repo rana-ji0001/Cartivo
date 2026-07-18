@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../Hooks/auth/auth.hooks'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPass, setShowPass] = useState(false);
     const navigate = useNavigate();
     const { loading, handleLogin } = useAuth();
 
@@ -13,7 +15,7 @@ const Login = () => {
         await handleLogin({ email, password });
         navigate('/');
     }
-    if(loading){
+    if (loading) {
         return (<auth><h1>Loading...</h1></auth>)
     }
     return (
@@ -27,9 +29,15 @@ const Login = () => {
 
                     </div>
                     <div className='input-group'>
-                        <label htmlFor="password">Password</label>
-                        <input onChange={(e) => { setPassword(e.target.value) }} type="password" id='password' name='password' placeholder='Enter Password!' />
+                        <div className='password-wrapper'>
+                            <label htmlFor="password">Password</label>
+                            <input onChange={(e) => { setPassword(e.target.value) }} type={showPass ? "text" : "password"} id='password' name='password' placeholder='Enter Password!' className='password-input' />
+                            <button type="button"
+                                className="eye-btn"
+                                onClick={() => setShowPass(!showPass)}>{showPass ? <FaEyeSlash /> : <FaEye />}</button>
 
+                        </div>
+                        <button className='shine-btn'>Register</button>
                     </div>
                     <button className='shine-btn'>Login</button>
                 </form>

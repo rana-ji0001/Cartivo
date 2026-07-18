@@ -28,7 +28,7 @@ const EmailVerify = () => {
                 </div>
                 <div className='input-group'>
                     <label htmlFor="password">Otp</label>
-                    <input onChange={(e) => {setOtp(e.target.value)}} type="password" id='password' name='password' placeholder='Enter Otp' />
+                    <input onChange={(e) => {setOtp(e.target.value)}} type="text" id='password' name='password' placeholder='Enter Otp' />
 
                 </div>
                 <button className='shine-btn'>Verify</button>

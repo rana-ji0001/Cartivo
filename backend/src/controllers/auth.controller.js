@@ -84,10 +84,12 @@ async function loginUserController(req, res) {
 
             return res.status(200).json({
                 message: "User Logged In Successfully",
-                id: user._id,
-                username: user.username,
-                email: user.email,
-                role: user.role,
+                user: {
+                    id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    role: user.role,
+                }
             });
         } else {
             return res.status(400).json({
@@ -142,14 +144,14 @@ async function getMeController(req, res) {
  * @access Public
  */
 
-async function logoutUserController(req,res) {
+async function logoutUserController(req, res) {
     const token = req.cookies.token;
-    if(token){
-        await blacklistedModel.create({token});
+    if (token) {
+        await blacklistedModel.create({ token });
     }
     res.clearCookie("token");
     res.status(200).json({ message: "User Logout Successfully" })
-    
+
 }
 
 /**
@@ -159,53 +161,55 @@ async function logoutUserController(req,res) {
  */
 async function verifyEmailController(req, res) {
     const { otp, email } = req.body;
-    try{const user = await userModel.findOne({ email });
-    if (!user) {
-        return res.status(404).json({
-            message: "User not found"
-        });
-    }
-    if (user.otp !== otp) {
-        return res.status(400).json({
-            message: "Wrong Otp"
-        });
-    }
-    if (user.otpExpires < Date.now()) {
+    try {
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+        if (user.otp !== otp) {
+            return res.status(400).json({
+                message: "Wrong Otp"
+            });
+        }
+        if (user.otpExpires < Date.now()) {
+            user.otp = null;
+            user.otpExpires = null;
+            await user.save();
+            return res.status(400).json({
+                message: "OTP expired"
+            });
+        }
+        user.verified = true;
         user.otp = null;
         user.otpExpires = null;
         await user.save();
-        return res.status(400).json({
-            message: "OTP expired"
+
+
+        const token = jwt.sign(
+            { id: user._id, username: user.username },
+            process.env.JWT_SECRET,
+            { expiresIn: "1D" }
+        )
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            maxAge: 24 * 60 * 60 * 1000
         });
-    }
-    user.verified = true;
-    user.otp = null;
-    user.otpExpires = null;
-    await user.save();
-
-
-    const token = jwt.sign(
-        { id: user._id, username: user.username },
-        process.env.JWT_SECRET,
-        { expiresIn: "1D" }
-    )
-    res.cookie("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        maxAge: 24 * 60 * 60 * 1000
-    });
-    return res.status(200).json({
-        message: "Email verified successfully",
-        user: {
-            id: user._id,
-            username: user.username,
-            email: user.email,
-            role: user.role
-        }
-    })}catch(error){
+        return res.status(200).json({
+            message: "Email verified successfully",
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                role: user.role
+            }
+        })
+    } catch (error) {
         return res.status(400).json({
-            message:error.message
+            message: error.message
         })
     }
 

@@ -30,7 +30,7 @@ const Navbar = () => {
 
             {user.role === "admin" && <li><Link to="/admin">Admin</Link></li>}
             <li>
-              <button onClick={handleClick} className="shine-btn">Logout</button>
+              <button onClick={handleClick} ><a href="">Logout</a></button>
             </li>
           </>
         ) : <li><Link to="/login">Login</Link></li>}
