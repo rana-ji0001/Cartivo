@@ -51,4 +51,14 @@ export async function getMe() {
     
 }
 
+export async function verifyEmail({otp, email}) {
+    try {
+        const response = await api.post("auth/verify-email",{otp, email});
+        return response.data;
+    } catch (error) {
+        console.log(error.message || "error")
+    }
+    
+}
+
 

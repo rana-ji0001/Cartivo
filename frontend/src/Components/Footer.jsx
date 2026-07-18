@@ -17,7 +17,7 @@ const Footer = () => {
           <Link to="/disclaimer" >Disclaimer</Link>
         </div>
         
-        <div style={{ color: '#404E3B', fontSize: '0.9rem' }}>
+        <div style={{ color: '#e6e6e6', fontSize: '0.9rem' }}>
           &copy; {new Date().getFullYear()} Cartivo. All rights reserved.
         </div>
       </div>

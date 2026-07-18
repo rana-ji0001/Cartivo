@@ -1,17 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 
 
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 30px;
+    justify-items: center;
+}
 .productCard {
     width: 280px;
-    background: #ffffff;
+    background: #e6e6e6;
     border-radius: 15px;
     font-family: "Oswald", sans-serif;
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     cursor: pointer;
-    display: flex;
+    display: grid;
     flex-direction: column;
+    position: relative;
 }
 
 .productCard:hover {
@@ -65,7 +74,7 @@
 }
 
 .view-info:hover {
-    background: #2563eb;
+    background: #404E3B;
 }
 
 @media (max-width: 768px) {

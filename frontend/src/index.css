@@ -16,6 +16,7 @@
   color:#E6E6E6;
 }
 
+
 body {
   background-color: #09090b;
   color: #fafafa;
@@ -85,7 +86,7 @@ h1, h2, h3, h4 {
 }
 h2 {
   font-size: 2rem;
-  background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb);
+  background: #E6E6E6;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
