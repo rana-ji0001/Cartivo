@@ -1,8 +1,10 @@
 <p align="center">
-  <img src="/frontend/public/logo.png" alt="Cartivo Logo" width="180">
+  <img src="/frontend/public/logo.png" alt="Cartivo Logo" width="80">
 </p>
-
 <h1 align="center">Cartivo</h1>
+<p align="center">
+Modern MERN E-Commerce Platform
+</p>
 
 Cartivo is a modern full-stack E-Commerce web application built using the MERN Stack. It provides a seamless shopping experience with secure authentication, product management, shopping cart functionality, and an admin dashboard for managing products.
 
