@@ -23,7 +23,7 @@ router.post("/order", paymentController.createOrderConrtoller);
  * @description to verify the payment
  * @access Private 
  */
-router.post("/order", paymentController.verifyPaymentController);
+router.post("/verify", paymentController.verifyPaymentController);
 
 
 module.exports = router

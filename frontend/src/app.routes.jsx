@@ -9,6 +9,7 @@ import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import EmailVerify from "./Pages/EmailVerify";
 import ProductDetails from "./Pages/ProductDetails";
+import Cart from "./Pages/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path:"/products/:id",
         element:<ProductDetails/>
+      },
+      {
+        path:"/cart",
+        element:<Cart/>
       }
     ],
   },

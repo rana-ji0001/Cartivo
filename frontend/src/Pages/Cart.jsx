@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import { removeFromCart, addToCart } from '../redux/cartSlice';
 import '../styles/cart.css';
 
@@ -11,7 +11,7 @@ const Cart = () => {
 
   const handleRemove = (id) => {
     dispatch(removeFromCart(id));
-  };
+  }; 
 
   const handleUpdateQty = (item, qty) => {
     if (qty > 0) {
