@@ -15,14 +15,12 @@ async function createOrderConrtoller(req, res) {
             receipt: crypto.randomBytes(10).toString("hex")
         }
         const order = await instance.orders.create(options);
-        return res.stauts(200).json({ message: "Payment Was Successfull", order });
+        return res.status(200).json({ message: "Payment Was Successfull", order });
 
     } catch (error) {
-        return res.stauts(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 }
-
-
 /**
  * @router Post api/payment/verify
  * @description to verify the payment

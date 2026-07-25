@@ -9,8 +9,35 @@ const api = axios.create({
 
 export const createOrderInDb = async(formData) => {
     try {
-        const response = await api.post("/",{formData})
+        const response = await api.post("/",formData);
+        return response.data;
     } catch (error) {
-        
+        console.log("this is create orderInDb error" + error.message);
     }
 } 
+
+export const getAllOrdersAdmin = async() => {
+    try {
+        const response = await api.get("/");
+        return response.data;
+    } catch (error) {
+        console.log("This is getordersadmin errror" + error.message);
+    }
+}
+
+export const getMyOrder = async() => {
+    try {
+        const response = await api.get("/myOrders");
+        return response.data;
+    } catch (error) {
+        console.log("This is get My order error " + error.message);
+    }
+}
+export const updateOrder = async(id) => {
+    try {
+        const response = await api.put(`/${id}/status`);
+        return response.data;
+    } catch (error) {
+        console.log("This is updateOrder error "+ error.message);
+    }
+}

@@ -1,9 +1,9 @@
 import { login, register, logout, getMe, verifyEmail} from "../../Api/auth.api";
 import { useState, useEffect, useContext } from "react";
-import { Authcontext } from "../../Context/AuthContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 export const useAuth = () => {
-    const context = useContext(Authcontext);
+    const context = useContext(AuthContext);
     const {loading, setLoading, user, setUser} = context;
 
 

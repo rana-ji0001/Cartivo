@@ -1,0 +1,183 @@
+/* ===========================
+   CHECKOUT PAGE
+=========================== */
+
+.checkout-container {
+    min-height: 100vh;
+    background: #0d1117;
+    color: #fff;
+    padding: 50px 8%;
+}
+
+.checkout-container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #ffffff;
+}
+
+/* ===========================
+   LAYOUT
+=========================== */
+
+.checkout-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.shipping-form {
+    width: 100%;
+    max-width: 700px;
+    background: #161b22;
+    border: 1px solid #222831;
+    border-radius: 18px;
+    padding: 40px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+.shipping-form h3 {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+/* ===========================
+   INPUTS
+=========================== */
+
+.shipping-form input {
+    width: 100%;
+    padding: 15px 18px;
+    margin-bottom: 18px;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    background: #0d1117;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.shipping-form input::placeholder {
+    color: #8b949e;
+}
+
+.shipping-form input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* ===========================
+   SUMMARY
+=========================== */
+
+.checkout-summary {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #30363d;
+}
+
+.checkout-summary h4 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.35);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0d1117;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 768px) {
+
+    .checkout-container {
+        padding: 30px 20px;
+    }
+
+    .checkout-container h2 {
+        font-size: 2rem;
+    }
+
+    .shipping-form {
+        padding: 25px;
+    }
+
+    .shipping-form h3 {
+        font-size: 1.4rem;
+    }
+
+    .checkout-summary h4 {
+        font-size: 1.25rem;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .shipping-form {
+        padding: 20px;
+    }
+
+    .shipping-form input {
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 14px;
+        font-size: 15px;
+    }
+}

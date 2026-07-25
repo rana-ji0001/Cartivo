@@ -10,6 +10,10 @@ import Login from "./Pages/Login";
 import EmailVerify from "./Pages/EmailVerify";
 import ProductDetails from "./Pages/ProductDetails";
 import Cart from "./Pages/Cart";
+import Checkout from "./Pages/Checkout";
+import OrderSuccess from "./Pages/OrderSuccess";
+import Profile from "./Pages/Profile";
+import Shop from "./Pages/Shop";
 
 export const router = createBrowserRouter([
   {
@@ -50,7 +54,24 @@ export const router = createBrowserRouter([
       {
         path:"/cart",
         element:<Cart/>
+      },
+      {
+        path:"/checkout",
+        element:<Checkout/>
+      },
+      {
+        path:"/ordersuccess",
+        element:<OrderSuccess/>
+      },
+      {
+        path:"/profile",
+        element:<Profile/>
+      },
+      {
+        path:"/shop",
+        element:<Shop/>
       }
+
     ],
   },
 ]);

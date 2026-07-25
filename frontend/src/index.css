@@ -1,21 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");
 
 @font-face {
-    font-family: "Wagon";
-    src: url("./assets/fonts/Wagon-ExtraLight.otf") format("truetype");
-    src: url("./assets/fonts/Wagon-Bold.otf") format("truetype");
-    font-weight: 200;
-    font-style: normal;
+  font-family: "Wagon";
+  src: url("./assets/fonts/Wagon-ExtraLight.otf") format("truetype");
+  src: url("./assets/fonts/Wagon-Bold.otf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
 }
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Wagon", sans-serif;
-  color:#E6E6E6;
+  color: #e6e6e6;
 }
-
 
 body {
   background-color: #09090b;
@@ -23,10 +21,9 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-.main-content{
+.main-content {
   animation: fadeIn 0.6s ease-in-out;
 }
-
 
 .vanta-background {
   position: fixed;
@@ -37,38 +34,41 @@ body {
   position: relative;
   z-index: 1;
   min-height: 100vh;
+  background: rgba(230, 230, 230, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .shine-btn {
-    position: relative;
-    overflow: hidden;
-    padding: 14px 34px;
-    border: none;
-    border-radius: 10px;
-    background: #404E3B;
-    color: white;
-    cursor: pointer;
-    transition: .3s;
+  position: relative;
+  overflow: hidden;
+  padding: 14px 34px;
+  border: none;
+  border-radius: 10px;
+  background: #404e3b;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .shine-btn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -120%;
-    width: 60%;
-    height: 100%;
-    background: rgba(255,255,255,.35);
-    transform: skewX(-25deg);
-    transition: .6s;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: skewX(-25deg);
+  transition: 0.6s;
 }
 
 .shine-btn:hover::before {
-    left: 160%;
+  left: 160%;
 }
 
 .shine-btn:hover {
-    background: #55684d;
+  background: #55684d;
 }
 a {
   text-decoration: none;
@@ -79,44 +79,53 @@ a {
 ul {
   list-style: none;
 }
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-weight: 700;
   letter-spacing: -0.5px;
   margin-bottom: 20px;
 }
 h2 {
   font-size: 2rem;
-  background: #E6E6E6;
+  background: #e6e6e6;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090b; 
+  background: #09090b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272a; 
+  background: #27272a;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46; 
+  background: #3f3f46;
 }
 
-.hero-banner{
-    height:350px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+.hero-banner {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.home h1{
-    font-size: 3rem;
+.home h1 {
+  font-size: 3rem;
 }

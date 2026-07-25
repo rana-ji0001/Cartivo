@@ -31,6 +31,6 @@ router.route("/myOrders").get(authUser,orderController.getMyOrderController)
  * @description to update the user controller 
  */
 
-router.route("/:id/status").post(authUser,admin,orderController.updateOrderController)
+router.route("/:id/status").put(authUser,admin,orderController.updateOrderController)
 
 module.exports = router

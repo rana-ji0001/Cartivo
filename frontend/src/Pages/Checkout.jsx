@@ -1,123 +1,219 @@
 import React, { useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../Context/AuthContext';
 import { clearCart } from '../redux/cartSlice';
 import { verifyPayment, createOrder } from '../Api/payment.api';
+import { createOrderInDb } from '../Api/order.api'
+import '../Styles/checkout.css'
 
 const Checkout = () => {
   const { user } = useContext(AuthContext);
+
   const cartItems = useSelector((state) => state.cart.cartItems);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [address, setAddress] = useState({
-    fullName: '', street: '', city: '', postalCode: '', country: ''
+    fullName: "",
+    street: "",
+    city: "",
+    postalCode: "",
+    country: "",
   });
 
-  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + item.price * item.qty,
+    0
+  );
 
   const handlePayment = async () => {
     try {
-      const orderData = await createOrder(totalPrice);
-      console.log(orderData);
+      // Create Razorpay Order
+      const order = await createOrder(totalPrice);
 
       const options = {
-        key: 'rzp_test_dummykey123', // Student dummy fallback
-        amount: orderData.order.amount,
-        currency: orderData.order.currency,
-        name: 'Cartivo',
-        description: 'Order Payment',
-        order_id: orderData.order.id,
+        key: import.meta.env.VITE_RAZORPAY_KEY,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Cartivo",
+        description: "Order Payment",
+        order_id: order.id,
         handler: async function (response) {
+          try {
+            // Verify Razorpay Payment
             await verifyPayment(response);
-            
-          if (verifyRes.ok) {
-            const saveOrderRes = await fetch('/api/orders', {
-              method: 'POST',
-              headers: { 
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${user.token}`
-              },
-              body: JSON.stringify({
-                items: cartItems,
-                totalAmount: totalPrice,
-                address,
-                paymentId: response.razorpay_payment_id
-              })
+
+            // Save Order in Database
+            await createOrderInDb({
+              items: cartItems,
+              totalAmount: totalPrice,
+              address,
+              paymentId: response.razorpay_payment_id,
             });
 
-            if (saveOrderRes.ok) {
-              dispatch(clearCart());
-              navigate('/ordersuccess');
-            } else {
-              alert('Order saving failed');
-            }
-          } else {
-            alert('Payment verification failed');
+            dispatch(clearCart());
+
+            navigate("/ordersuccess");
+          } catch (error) {
+            console.error(error);
+
+            alert(
+              error.response?.data?.message ||
+                "Payment verification failed."
+            );
           }
         },
+
         prefill: {
-          name: address.fullName,
+          name: address.fullName, 
           email: user?.email,
-          contact: '9999999999'
+          contact: "9999999999",
         },
+
         theme: {
-          color: '#f97316'
-        }
+          color: "#404e3b",
+        },
       };
-      
-      const rzp1 = new window.Razorpay(options);
-      rzp1.open();
+      const razorpay = new window.Razorpay(options);
+
+
+      razorpay.open();
     } catch (error) {
       console.error(error);
+
+      const message = error.response?.data?.message;
+
+      if (message === "Razorpay keys unconfigured") {
+        const fallback = window.confirm(
+          "Razorpay is not configured. Use Student Bypass Mode?"
+        );
+
+        if (fallback) {
+          return bypassPayment();
+        }
+      }
+
+      alert(message || "Payment initialization failed.");
     }
   };
 
   const bypassPayment = async () => {
-    const saveOrderRes = await fetch('/api/orders', {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${user.token}`
-      },
-      body: JSON.stringify({
+    try {
+      await createOrderInDb({
         items: cartItems,
         totalAmount: totalPrice,
         address,
-        paymentId: 'bypass_txn_' + Date.now()
-      })
-    });
-    if (saveOrderRes.ok) {
+        paymentId: "bypass_txn_" + Date.now(),
+      });
+
       dispatch(clearCart());
-      navigate('/ordersuccess');
+
+      navigate("/ordersuccess");
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        error.response?.data?.message ||
+          "Unable to create order."
+      );
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!user) {
       alert("Please login first");
-      navigate('/login');
+
+      navigate("/login");
+
       return;
     }
+
     handlePayment();
   };
 
   return (
     <div className="checkout-container">
       <h2>Checkout</h2>
+
       <div className="checkout-content">
         <form onSubmit={handleSubmit} className="shipping-form">
           <h3>Shipping Address</h3>
-          <input type="text" placeholder="Full Name" required value={address.fullName} onChange={(e) => setAddress({...address, fullName: e.target.value})} />
-          <input type="text" placeholder="Street" required value={address.street} onChange={(e) => setAddress({...address, street: e.target.value})} />
-          <input type="text" placeholder="City" required value={address.city} onChange={(e) => setAddress({...address, city: e.target.value})} />
-          <input type="text" placeholder="Postal Code" required value={address.postalCode} onChange={(e) => setAddress({...address, postalCode: e.target.value})} />
-          <input type="text" placeholder="Country" required value={address.country} onChange={(e) => setAddress({...address, country: e.target.value})} />
+
+          <input
+            type="text"
+            placeholder="Full Name"
+            required
+            value={address.fullName}
+            onChange={(e) =>
+              setAddress({
+                ...address,
+                fullName: e.target.value,
+              })
+            }
+          />
+
+          <input
+            type="text"
+            placeholder="Street"
+            required
+            value={address.street}
+            onChange={(e) =>
+              setAddress({
+                ...address,
+                street: e.target.value,
+              })
+            }
+          />
+
+          <input
+            type="text"
+            placeholder="City"
+            required
+            value={address.city}
+            onChange={(e) =>
+              setAddress({
+                ...address,
+                city: e.target.value,
+              })
+            }
+          />
+
+          <input
+            type="text"
+            placeholder="Postal Code"
+            required
+            value={address.postalCode}
+            onChange={(e) =>
+              setAddress({
+                ...address,
+                postalCode: e.target.value,
+              })
+            }
+          />
+
+          <input
+            type="text"
+            placeholder="Country"
+            required
+            value={address.country}
+            onChange={(e) =>
+              setAddress({
+                ...address,
+                country: e.target.value,
+              })
+            }
+          />
+
           <div className="checkout-summary">
             <h4>Total to Pay: ₹{totalPrice.toFixed(2)}</h4>
-            <button type="submit" className="btn">Pay Now</button>
+
+            <button type="submit" className="btn">
+              Pay Now
+            </button>
           </div>
         </form>
       </div>
