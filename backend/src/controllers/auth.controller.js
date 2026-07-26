@@ -77,8 +77,8 @@ async function loginUserController(req, res) {
             );
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: false,      // true if using HTTPS
-                sameSite: "lax",    // or "none" if frontend/backend are on different origins with HTTPS
+                secure: true,      // true if using HTTPS
+                sameSite: "none",    // or "none" if frontend/backend are on different origins with HTTPS
                 maxAge: 24 * 60 * 60 * 1000
             });
 
