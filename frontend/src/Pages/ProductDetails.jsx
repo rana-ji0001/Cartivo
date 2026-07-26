@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../redux/cartSlice';
+import { addToCart } from '../Redux/cartSlice';
 import { getProductById } from '../products/services/products.api';
 import '../Styles/productCard.css';
 

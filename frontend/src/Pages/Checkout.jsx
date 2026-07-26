@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthContext';
-import { clearCart } from '../redux/cartSlice';
+import { clearCart } from '../Redux/cartSlice';
 import { verifyPayment, createOrder } from '../Api/payment.api';
 import { createOrderInDb } from '../Api/order.api'
 import '../Styles/checkout.css'
