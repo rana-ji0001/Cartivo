@@ -231,7 +231,7 @@ const ProductDetails = () => {
 
                     <button
                         onClick={handleAddToCart}
-                        className="shine-btn"
+                        className="shine-btn btn"
                         style={{
                             width: "100%",
                             padding: "18px",

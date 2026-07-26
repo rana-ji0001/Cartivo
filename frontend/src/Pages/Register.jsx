@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAuth } from '../Hooks/auth/auth.hooks';
 import { Link, useNavigate } from 'react-router';
 import '../Styles/auth.css'
@@ -9,8 +9,14 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { loading, handleRegister } = useAuth();
+    const { loading, handleRegister, user } = useAuth();
     const [showPass, setShowPass] = useState(false);
+    useEffect(() => {
+            if(user){
+                navigate("/shop")
+            }
+        })
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();

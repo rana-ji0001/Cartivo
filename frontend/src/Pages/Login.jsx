@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../Hooks/auth/auth.hooks'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -8,7 +8,12 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [showPass, setShowPass] = useState(false);
     const navigate = useNavigate();
-    const { loading, handleLogin } = useAuth();
+    const { loading, handleLogin, user } = useAuth();
+    useEffect(() => {
+        if(user){
+            navigate("/shop")
+        }
+    })
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,7 +42,6 @@ const Login = () => {
                                 onClick={() => setShowPass(!showPass)}>{showPass ? <FaEyeSlash /> : <FaEye />}</button>
 
                         </div>
-                        <button className='shine-btn'>Register</button>
                     </div>
                     <button className='shine-btn'>Login</button>
                 </form>

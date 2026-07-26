@@ -14,6 +14,12 @@ import Checkout from "./Pages/Checkout";
 import OrderSuccess from "./Pages/OrderSuccess";
 import Profile from "./Pages/Profile";
 import Shop from "./Pages/Shop";
+import AdminDashboard from "./Admin/AdminDashboard";
+import AddProducts from "./Admin/AddProducts";
+import AdminProducts from "./Admin/AdminProducts";
+import EditProduct from "./Admin/EditProduct";
+import AdminOrders from "./Admin/AdminOrders";
+import AdminUser from "./Admin/AdminUser";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +76,30 @@ export const router = createBrowserRouter([
       {
         path:"/shop",
         element:<Shop/>
+      },
+      {
+        path:"/admin",
+        element:<AdminDashboard/>
+      },
+      {
+        path:"/admin/add-product",
+        element:<AddProducts/>
+      },
+      {
+        path:"/admin/products",
+        element:<AdminProducts/>
+      },
+      {
+        path:"/admin/edit-product/:id",
+        element:<EditProduct/>
+      },
+      {
+        path:"/admin/orders",
+        element:<AdminOrders/>
+      },
+      {
+        path:"/admin/users",
+        element:<AdminUser/>
       }
 
     ],

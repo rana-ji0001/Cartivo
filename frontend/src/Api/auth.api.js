@@ -53,7 +53,7 @@ export async function getMe() {
 
 export async function verifyEmail({otp, email}) {
     try {
-        const response = await api.post("auth/verify-email",{otp, email});
+        const response = await api.post("/auth/verify-email",{otp, email});
         return response.data;
     } catch (error) {
         console.log(error.message || "error")
@@ -61,4 +61,11 @@ export async function verifyEmail({otp, email}) {
     
 }
 
-
+export async function getUsers(){
+    try{
+        const response = await api.get("/auth/users");
+        return response.data;
+    }catch(error){
+        console.log("this is getUsers " + error.message)
+    }
+}

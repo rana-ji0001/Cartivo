@@ -33,9 +33,11 @@ export const getMyOrder = async() => {
         console.log("This is get My order error " + error.message);
     }
 }
-export const updateOrder = async(id) => {
+export const updateOrder = async(id, status) => {
     try {
-        const response = await api.put(`/${id}/status`);
+        const response = await api.put(`/${id}/status`,{
+            status
+        });
         return response.data;
     } catch (error) {
         console.log("This is updateOrder error "+ error.message);
